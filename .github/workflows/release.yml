@@ -92,8 +92,8 @@ jobs:
           https://api.github.com/repos/Edgenesis/shifu/releases/generate-notes \
           -d '{"tag_name":"${{ env.NEW_TAG }}","target_commitish":"'"${target_commitish}"'","previous_tag_name":"${{ env.PREVIOUS_TAG }}"}')
           response=$(echo "$response" | sed 's/^```//;s/```$//')
-          echo $response
-          go run tools/release/release.go "$response"
+          echo $response >> CHANGELOG/test.md
+          # go run tools/release/release.go "$response"
         env:
           AZURE_OPENAI_APIKEY: ${{ secrets.AZURE_OPENAI_APIKEY }}
           AZURE_OPENAI_HOST: ${{ secrets.AZURE_OPENAI_HOST }}
